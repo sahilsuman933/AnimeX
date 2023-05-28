@@ -1,10 +1,9 @@
 import { type NextPage } from "next";
-import { api } from "~/utils/api";
-
+import Navbar from "~/components/Navbar";
 const Home: NextPage = () => {
   return (
     <>
-      <p>Hello Sahil!</p>
+      <Navbar />
     </>
   );
 };
