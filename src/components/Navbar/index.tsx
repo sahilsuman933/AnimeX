@@ -1,27 +1,36 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div>
-      <Image src="/images/logo.svg" width={155} height={45} alt="Logo" />
-      <div>
-        <input type="text" placeholder="Enter anime name..." />
-        <div>
-          <Image
-            src="/icons/search.svg"
-            width={20}
-            height={21}
-            alt="Search Icon"
+    <div className="m-8 flex items-center justify-between">
+      <div className="flex gap-4">
+        <Image src="/images/logo.svg" width={155} height={45} alt="Logo" />
+        <div className="flex items-center gap-3 rounded-md bg-blue-light pr-[1rem]">
+          <input
+            type="text"
+            placeholder="Enter anime name..."
+            className="bg-black-container px-[20px] py-[10px] text-text-grey focus:outline-none"
           />
+          <div>
+            <Image
+              src="/icons/search.svg"
+              width={20}
+              height={21}
+              alt="Search Icon"
+              className="hover:cursor-pointer"
+            />
+          </div>
         </div>
       </div>
-
-      <div className="text-text-grey">
+      <div className="flex items-center gap-3 text-text-grey">
         <p>Home</p>
         <p>Top Anime</p>
         <p>Upcoming</p>
         <p>Random</p>
-        <button>Sign in</button>
+        <button className="rounded-md bg-blue-light px-[20px] py-[5px]">
+          <Link href="/login"> Sign in</Link>
+        </button>
       </div>
     </div>
   );
