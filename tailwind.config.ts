@@ -17,6 +17,7 @@ export default {
       text: {
         grey: "#E5E5E5",
         white: "#FFFFFF",
+        golden: "#ECC47C",
       },
     },
     extend: {},
