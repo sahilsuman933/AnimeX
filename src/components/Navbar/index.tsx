@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import getAnimeName from "~/helpers/getAnimeName";
 
 const Navbar = () => {
+  const [animeName, setAnimeName] = useState("");
+
   return (
     <div className="m-8 mx-auto flex w-[90vw]  items-center justify-between">
       <div className="flex items-center gap-4">
@@ -14,6 +18,9 @@ const Navbar = () => {
             type="text"
             placeholder="Enter anime name..."
             className="bg-black-container px-[20px] py-[10px] text-text-grey focus:outline-none"
+            onChange={(e) => {
+              setAnimeName(e.target.value);
+            }}
           />
           <div>
             <Image
@@ -22,6 +29,9 @@ const Navbar = () => {
               height={21}
               alt="Search Icon"
               className="hover:cursor-pointer"
+              onClick={async () => {
+                console.log(await getAnimeName(animeName));
+              }}
             />
           </div>
         </div>
