@@ -3,11 +3,13 @@ import { getAnimeName } from "../../utils/anime";
 import Loading from "~/components/Loading";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
-import Image from "next/image";
 import AnimeCard from "~/components/AnimeCard";
+import { useState } from "react";
 
 const SearchPage = () => {
   const { query, isReady, replace } = useRouter();
+  const [currPage, setPage] = useState(1);
+  let count = 1;
 
   if (isReady) {
     if (!query.q) {
@@ -15,7 +17,8 @@ const SearchPage = () => {
     }
   }
 
-  const { data, isLoading } = getAnimeName(query.q);
+  const { data, isLoading } = getAnimeName(query.q, currPage);
+  const pageNum = !isLoading ? data.pagination.current_page : 1;
 
   if (isLoading) {
     return <Loading />;
@@ -33,7 +36,7 @@ const SearchPage = () => {
           Search results for:
           <span className="capitalize text-text-golden"> {query.q}</span>
         </p>
-        <div className="max-w- grid max-w-[80%] grid-cols-6 grid-rows-2 gap-x-2 gap-y-2">
+        <div className="grid max-w-[70%] grid-cols-5">
           {data.data.map((anime) => {
             return (
               <AnimeCard
@@ -46,20 +49,47 @@ const SearchPage = () => {
             );
           })}
         </div>
-        {data.pagination.has_next_page ? (
-          <button className="mb-2 flex items-center gap-2 rounded-md bg-black-btn  px-[20px] py-2 text-blue-light">
-            <Image
-              src="/icons/bottom-arrow.svg"
-              width={12}
-              height={11}
-              alt="Bottom Arrow Icon"
-              className="fill-blue-dark hover:cursor-pointer"
-            />
-            Load More
+
+        <div className="flex items-center justify-center gap-2 pb-5 text-text-white">
+          <button
+            className="mb-2 flex items-center gap-2 rounded-md bg-black-btn  px-[20px] py-2 text-blue-light"
+            onClick={() => {
+              setPage(pageNum - 1);
+            }}
+          >
+            Previous
           </button>
-        ) : (
-          ""
-        )}
+          <p>page</p>
+          <div className="flex">
+            <input
+              type="text"
+              className="mb-2 w-10  bg-black-container text-center text-text-grey focus:outline-none "
+              placeholder={pageNum}
+              onChange={(e) => {
+                count = Number(e.target.value);
+              }}
+            />
+            <button
+              className="mb-2 flex items-center rounded-e-md bg-black-btn px-[20px] py-2 text-blue-light"
+              onClick={() => {
+                setPage(count);
+              }}
+            >
+              go
+            </button>
+          </div>
+          <p>
+            of <span>{data.pagination.last_visible_page}</span>
+          </p>
+          <button
+            className="mb-2 flex items-center gap-2 rounded-md bg-black-btn  px-[20px] py-2 text-blue-light"
+            onClick={() => {
+              setPage(pageNum + 1);
+            }}
+          >
+            Next
+          </button>
+        </div>
       </div>
 
       <Footer />
