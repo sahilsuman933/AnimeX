@@ -2,9 +2,13 @@ import { type NextPage } from "next";
 import Footer from "~/components/Footer";
 import Navbar from "~/components/Navbar";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const [animeName, setAnimeName] = useState("");
+
   return (
     <>
       <Navbar />
@@ -16,6 +20,9 @@ const Home: NextPage = () => {
               type="text"
               placeholder="Enter anime name..."
               className="bg-black-container py-[10px] pl-[20px] pr-[200px] text-text-grey focus:outline-none"
+              onChange={(e) => {
+                setAnimeName(e.target.value);
+              }}
             />
             <Image
               src="/icons/search.svg"
@@ -23,6 +30,9 @@ const Home: NextPage = () => {
               height={21}
               alt="Search Icon"
               className="hover:cursor-pointer"
+              onClick={() => {
+                router.replace(`/search?q=${animeName}`);
+              }}
             />
           </div>
           <p className="mt-[-10px] text-text-golden">

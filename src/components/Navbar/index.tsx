@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
-import getAnimeName from "~/helpers/getAnimeName";
 
 const Navbar = () => {
+  const router = useRouter();
   const [animeName, setAnimeName] = useState("");
 
   return (
@@ -29,8 +30,8 @@ const Navbar = () => {
               height={21}
               alt="Search Icon"
               className="hover:cursor-pointer"
-              onClick={async () => {
-                console.log(await getAnimeName(animeName));
+              onClick={() => {
+                router.replace(`/search?q=${animeName}`);
               }}
             />
           </div>
