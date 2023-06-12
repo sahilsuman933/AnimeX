@@ -39,7 +39,7 @@ const Navbar = () => {
       </div>
       <div className="flex items-center gap-3 text-text-grey">
         <Link href={"/"}>Home</Link>
-        <p>Top Anime</p>
+        <Link href={"/trending"}>Top Anime</Link>
         <p>Upcoming</p>
         <p>Random</p>
         <button className="rounded-md bg-blue-light px-[20px] py-[5px]">

@@ -17,3 +17,10 @@ export const getAnimeName = (
     fetcher
   );
 };
+export const getTopAnime = (pageNumber: number) => {
+  pageNumber = pageNumber ? pageNumber : 1;
+  return useSWR(
+    `https://api.jikan.moe/v4/top/anime?page=${pageNumber}&filter=airing`,
+    fetcher
+  );
+};
