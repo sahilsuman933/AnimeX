@@ -12,7 +12,6 @@ const TopAnime = () => {
   const { data, isLoading } = getTopAnime(currPage);
 
   const pageNum = !isLoading ? data.pagination.current_page : 1;
-  console.log(currPage);
 
   if (isLoading) {
     return <Loading />;
