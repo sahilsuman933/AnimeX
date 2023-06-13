@@ -45,6 +45,7 @@ const SearchPage = () => {
                   anime.title_english ? anime.title_english : anime.title
                 }
                 episodes={anime.episodes}
+                id={anime.mal_id}
               />
             );
           })}
